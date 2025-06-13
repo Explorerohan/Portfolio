@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Portfolio</title>
+    <link href="./dist/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/scrollreveal"></script>
+</head>
+<body class="bg-primary text-textPrimary min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-primary/95 backdrop-blur-sm shadow-lg">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center h-20">
+                <a href="#" class="text-2xl font-bold text-secondary relative group">
+                    Rohan Rai
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#projects" class="nav-link group relative text-textSecondary hover:text-secondary transition-colors duration-300">
+                        Projects
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#skills" class="nav-link group relative text-textSecondary hover:text-secondary transition-colors duration-300">
+                        Skills
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#contact" class="nav-link group relative text-textSecondary hover:text-secondary transition-colors duration-300">
+                        Contact
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </div>
+                <button class="md:hidden text-textSecondary hover:text-secondary transition-colors duration-300">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-primary to-primary/95">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMDIwMjAiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0YzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="mb-8">
+                    <h1 class="text-4xl md:text-6xl font-bold text-textPrimary mb-6">
+                        <span class="inline-block animate-fade-in-up" style="animation-delay: 0.1s">Hi, I'm</span>
+                        <span class="text-secondary inline-block animate-fade-in-up" style="animation-delay: 0.2s"> Rohan Rai</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-textSecondary animate-fade-in-up" style="animation-delay: 0.3s">
+                        I'm passionate about technology and enjoy exploring new tools and ideas. I love building software that solves problems and makes a positive impact through practical, creative solutions.
+                    </p>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-3 animate-fade-in-up" style="animation-delay: 0.4s">
+                    <div class="flex space-x-6 mb-2">
+                        <a href="https://github.com/Explorerohan" target="_blank" class="text-textSecondary hover:text-secondary transition-colors duration-300 transform hover:scale-110">
+                            <i class="fab fa-github text-3xl"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/rohan-rai-9bb78a327/" target="_blank" class="text-textSecondary hover:text-secondary transition-colors duration-300 transform hover:scale-110">
+                            <i class="fab fa-linkedin text-3xl"></i>
+                        </a>
+                        <a href="https://twitter.com/yourusername" target="_blank" class="text-textSecondary hover:text-secondary transition-colors duration-300 transform hover:scale-110">
+                            <i class="fab fa-twitter text-3xl"></i>
+                        </a>
+                    </div>
+                    <a href="assets/ROHAN-RAI-CV.pdf" download="ROHAN-RAI-CV.pdf" class="inline-flex items-center px-6 py-3 bg-secondary text-white rounded-lg shadow-lg hover:bg-secondary/90 transition-colors duration-300 transform hover:scale-105">
+                        <i class="fas fa-download mr-2"></i>
+                        Download CV
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#projects" class="text-textSecondary hover:text-secondary transition-colors duration-300">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gradient-to-br from-primary/95 to-primary">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-textPrimary mb-16">Featured Projects</h2>
+            
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+                <!-- Left Column: Website Projects -->
+                <div class="space-y-8">
+                    <!-- Project Card 1: College Academic Management System -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                        <div class="relative h-[300px] overflow-hidden">
+                            <img src="assets/Academic management system.png" alt="College Academic Management System" class="w-full h-full object-contain">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-bold text-textPrimary mb-2">College Academic Management System</h3>
+                            <p class="text-textSecondary mb-3 text-sm">A comprehensive Django-based academic management system for colleges. Features include student registration, course management, grade tracking, and attendance monitoring.</p>
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">Django</span>
+                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">Python</span>
+                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">SQLite</span>
+                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">Bootstrap</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="https://github.com/Explorerohan/College-Academic-Management-System" target="_blank" class="text-secondary hover:text-secondary/80 transition-colors duration-300">
+                                    <i class="fab fa-github text-lg"></i>
+                                </a>
+                                <a href="https://github.com/Explorerohan/College-Academic-Management-System" target="_blank" class="inline-flex items-center px-3 py-1.5 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors duration-300 text-sm">
+                                    View Project
+                                    <i class="fas fa-external-link-alt ml-1.5 text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 3: E-commerce Website -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                        <div class="relative h-[300px] overflow-hidden">
+                            <img src="assets/E-commerce.png" alt="E-commerce Website" class="w-full h-full object-contain">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-bold text-textPrimary mb-2">E-commerce Website</h3>
+                            <p class="text-textSecondary mb-3 text-sm">A fully responsive e-commerce platform for printers, featuring modern UI/UX design. Includes product listings with detailed specifications, advanced search and filter options.</p>
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">HTML5</span>
+                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">CSS3</span>
+                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">JavaScript</span>
+                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">Bootstrap</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="https://github.com/Explorerohan/E-commerce-Website" target="_blank" class="text-secondary hover:text-secondary/80 transition-colors duration-300">
+                                    <i class="fab fa-github text-lg"></i>
+                                </a>
+                                <a href="https://github.com/Explorerohan/E-commerce-Website" target="_blank" class="inline-flex items-center px-3 py-1.5 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors duration-300 text-sm">
+                                    View Project
+                                    <i class="fas fa-external-link-alt ml-1.5 text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Mobile App Project -->
+                <div class="lg:sticky lg:top-8 lg:self-start">
+                    <!-- Project Card 2: Easy Eats -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                        <div class="relative h-[300px] overflow-hidden">
+                            <img src="assets/Easy-Eats.jpg" alt="Easy Eats" class="w-full h-full object-contain">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-bold text-textPrimary mb-2">Easy Eats</h3>
+                            <p class="text-textSecondary mb-3 text-sm">A modern food delivery platform built with Django. Features include restaurant listings, menu management, online ordering, and real-time order tracking.</p>
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">Django</span>
+                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">JavaScript</span>
+                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">PostgreSQL</span>
+                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">Tailwind CSS</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="https://github.com/Explorerohan/Easy-Eats" target="_blank" class="text-secondary hover:text-secondary/80 transition-colors duration-300">
+                                    <i class="fab fa-github text-lg"></i>
+                                </a>
+                                <a href="https://github.com/Explorerohan/Easy-Eats" target="_blank" class="inline-flex items-center px-3 py-1.5 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors duration-300 text-sm">
+                                    View Project
+                                    <i class="fas fa-external-link-alt ml-1.5 text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-textPrimary mb-16">Skills & Technologies</h2>
+            
+            <div class="max-w-5xl mx-auto">
+                <!-- Frontend -->
+                <div class="mb-16">
+                    <h3 class="text-2xl font-bold text-secondary mb-10 text-center relative">
+                        <span class="bg-primary px-4 relative z-10">Frontend Development</span>
+                        <span class="absolute top-1/2 left-0 w-full h-0.5 bg-secondary/20 -translate-y-1/2"></span>
+                    </h3>
+                    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-10">
+                        <div class="flex flex-col items-center group">
+                            <div class="w-20 h-20 flex items-center justify-center bg-white rounded-xl shadow-lg p-4 mb-3 transform transition-transform duration-300 group-hover:scale-110">
+                                <i class="fab fa-html5 text-4xl text-[#E34F26]"></i>
+                            </div>
+                            <span class="text-sm text-textSecondary group-hover:text-secondary transition-colors duration-300">HTML5</span>
+                        </div>
+                        <div class="flex flex-col items-center group">
+                            <div class="w-20 h-20 flex items-center justify-center bg-white rounded-xl shadow-lg p-4 mb-3 transform transition-transform duration-300 group-hover:scale-110">
+                                <i class="fab fa-css3-alt text-4xl text-[#1572B6]"></i>
+                            </div>
+                            <span class="text-sm text-textSecondary group-hover:text-secondary transition-colors duration-300">CSS3</span>
+                        </div>
+                        <div class="flex flex-col items-center group">
+                            <div class="w-20 h-20 flex items-center justify-center bg-white rounded-xl shadow-lg p-4 mb-3 transform transition-transform duration-300 group-hover:scale-110">
+                                <i class="fab fa-js text-4xl text-[#F7DF1E]"></i>
+                            </div>
+                            <span class="text-sm text-textSecondary group-hover:text-secondary transition-colors duration-300">JavaScript</span>
+                        </div>
+                        <div class="flex flex-col items-center group">
+                            <div class="w-20 h-20 flex items-center justify-center bg-white rounded-xl shadow-lg p-4 mb-3 transform transition-transform duration-300 group-hover:scale-110">
+                                <i class="fab fa-react text-4xl text-[#61DAFB]"></i>
+                            </div>
+                            <span class="text-sm text-textSecondary group-hover:text-secondary transition-colors duration-300">React.js</span>
+                        </div>
+                        <div class="flex flex-col items-center group">
+                            <div class="w-20 h-20 flex items-center justify-center bg-white rounded-xl shadow-lg p-4 mb-3 transform transition-transform duration-300 group-hover:scale-110">
+                                <i class="fab fa-vuejs text-4xl text-[#4FC08D]"></i>
+                            </div>
+                            <span class="text-sm text-textSecondary group-hover:text-secondary transition-colors duration-300">Vue.js</span>
+                        </div>
+                        <div class="flex flex-col items-center group">
+                            <div class="w-20 h-20 flex items-center justify-center bg-white rounded-xl shadow-lg p-4 mb-3 transform transition-transform duration-300 group-hover:scale-110">
+                                <img src="https://avatars.githubusercontent.com/u/30317862?s=280&v=4" alt="Tailwind CSS" class="w-10 h-10 rounded-full">
+                            </div>
+                            <span class="text-sm text-textSecondary group-hover:text-secondary transition-colors duration-300">Tailwind CSS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend -->
+                <div class="mb-16">
+                    <h3 class="text-2xl font-bold text-secondary mb-10 text-center relative">
+                        <span class="bg-primary px-4 relative z-10">Backend Development</span>
+                        <span class="absolute top-1/2 left-0 w-full h-0.5 bg-secondary/20 -translate-y-1/2"></span>
+                    </h3>
+                    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-10">
+                        <div class="flex flex-col items-center group">
+                            <div class="w-20 h-20 flex items-center justify-center bg-white rounded-xl shadow-lg p-4 mb-3 transform transition-transform duration-300 group-hover:scale-110">
+                                <i class="fab fa-node-js text-4xl text-[#339933]"></i>
+                            </div>
+                            <span class="text-sm text-textSecondary group-hover:text-secondary transition-colors duration-300">Node.js</span>
+                        </div>
+                        <div class="flex flex-col items-center group">
+                            <div class="w-20 h-20 flex items-center justify-center bg-white rounded-xl shadow-lg p-4 mb-3 transform transition-transform duration-300 group-hover:scale-110">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express.js" class="w-10 h-10">
+                            </div>
+                            <span class="text-sm text-textSecondary group-hover:text-secondary transition-colors duration-300">Express.js</span>
+                        </div>
+                        <div class="flex flex-col items-center group">
+                            <div class="w-20 h-20 flex items-center justify-center bg-white rounded-xl shadow-lg p-4 mb-3 transform transition-transform duration-300 group-hover:scale-110">
+                                <i class="fab fa-python text-4xl text-[#3776AB]"></i>
+                            </div>
+                            <span class="text-sm text-textSecondary group-hover:text-secondary transition-colors duration-300">Python</span>
+                        </div>
+                        <div class="flex flex-col items-center group">
+                            <div class="w-20 h-20 flex items-center justify-center bg-white rounded-xl shadow-lg p-4 mb-3 transform transition-transform duration-300 group-hover:scale-110">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="Django" class="w-10 h-10">
+                            </div>
+                            <span class="text-sm text-textSecondary group-hover:text-secondary transition-colors duration-300">Django</span>
+                        </div>
+                        <div class="flex flex-col items-center group">
+                            <div class="w-20 h-20 flex items-center justify-center bg-white rounded-xl shadow-lg p-4 mb-3 transform transition-transform duration-300 group-hover:scale-110">
+                                <i class="fas fa-server text-4xl text-secondary"></i>
+                            </div>
+                            <span class="text-sm text-textSecondary group-hover:text-secondary transition-colors duration-300">RESTful APIs</span>
+                        </div>
+                        <div class="flex flex-col items-center group">
+                            <div class="w-20 h-20 flex items-center justify-center bg-white rounded-xl shadow-lg p-4 mb-3 transform transition-transform duration-300 group-hover:scale-110">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" alt="GraphQL" class="w-10 h-10">
+                            </div>
+                            <span class="text-sm text-textSecondary group-hover:text-secondary transition-colors duration-300">GraphQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Databases & Tools -->
+                <div>
+                    <h3 class="text-2xl font-bold text-secondary mb-10 text-center relative">
+                        <span class="bg-primary px-4 relative z-10">Databases & Tools</span>
+                        <span class="absolute top-1/2 left-0 w-full h-0.5 bg-secondary/20 -translate-y-1/2"></span>
+                    </h3>
+                    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-10">
+                        <div class="flex flex-col items-center group">
+                            <div class="w-20 h-20 flex items-center justify-center bg-white rounded-xl shadow-lg p-4 mb-3 transform transition-transform duration-300 group-hover:scale-110">
+                                <i class="fas fa-database text-4xl text-[#4479A1]"></i>
+                            </div>
+                            <span class="text-sm text-textSecondary group-hover:text-secondary transition-colors duration-300">MongoDB</span>
+                        </div>
+                        <div class="flex flex-col items-center group">
+                            <div class="w-20 h-20 flex items-center justify-center bg-white rounded-xl shadow-lg p-4 mb-3 transform transition-transform duration-300 group-hover:scale-110">
+                                <i class="fas fa-database text-4xl text-[#336791]"></i>
+                            </div>
+                            <span class="text-sm text-textSecondary group-hover:text-secondary transition-colors duration-300">PostgreSQL</span>
+                        </div>
+                        <div class="flex flex-col items-center group">
+                            <div class="w-20 h-20 flex items-center justify-center bg-white rounded-xl shadow-lg p-4 mb-3 transform transition-transform duration-300 group-hover:scale-110">
+                                <i class="fas fa-database text-4xl text-[#00758F]"></i>
+                            </div>
+                            <span class="text-sm text-textSecondary group-hover:text-secondary transition-colors duration-300">MySQL</span>
+                        </div>
+                        <div class="flex flex-col items-center group">
+                            <div class="w-20 h-20 flex items-center justify-center bg-white rounded-xl shadow-lg p-4 mb-3 transform transition-transform duration-300 group-hover:scale-110">
+                                <i class="fab fa-git-alt text-4xl text-[#F05032]"></i>
+                            </div>
+                            <span class="text-sm text-textSecondary group-hover:text-secondary transition-colors duration-300">Git</span>
+                        </div>
+                        <div class="flex flex-col items-center group">
+                            <div class="w-20 h-20 flex items-center justify-center bg-white rounded-xl shadow-lg p-4 mb-3 transform transition-transform duration-300 group-hover:scale-110">
+                                <i class="fab fa-docker text-4xl text-[#2496ED]"></i>
+                            </div>
+                            <span class="text-sm text-textSecondary group-hover:text-secondary transition-colors duration-300">Docker</span>
+                        </div>
+                        <div class="flex flex-col items-center group">
+                            <div class="w-20 h-20 flex items-center justify-center bg-white rounded-xl shadow-lg p-4 mb-3 transform transition-transform duration-300 group-hover:scale-110">
+                                <i class="fab fa-aws text-4xl text-[#232F3E]"></i>
+                            </div>
+                            <span class="text-sm text-textSecondary group-hover:text-secondary transition-colors duration-300">AWS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-br from-primary to-primary/95">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-textPrimary mb-16">Get In Touch</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-xl shadow-lg p-8 md:p-12">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="relative">
+                                <input type="text" id="name" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-300" placeholder="Your Name">
+                                <label for="name" class="absolute left-4 -top-2.5 bg-white px-2 text-sm text-textSecondary">Name</label>
+                            </div>
+                            <div class="relative">
+                                <input type="email" id="email" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-300" placeholder="Your Email">
+                                <label for="email" class="absolute left-4 -top-2.5 bg-white px-2 text-sm text-textSecondary">Email</label>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <input type="text" id="subject" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-300" placeholder="Subject">
+                            <label for="subject" class="absolute left-4 -top-2.5 bg-white px-2 text-sm text-textSecondary">Subject</label>
+                        </div>
+                        <div class="relative">
+                            <textarea id="message" rows="6" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-300" placeholder="Your Message"></textarea>
+                            <label for="message" class="absolute left-4 -top-2.5 bg-white px-2 text-sm text-textSecondary">Message</label>
+                        </div>
+                        <button type="submit" class="w-full md:w-auto px-8 py-3 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors duration-300 transform hover:scale-105">
+                            Send Message
+                            <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-textSecondary mb-4 md:mb-0">
+                    © 2024 Rohan Rai. All rights reserved.
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/Explorerohan" target="_blank" class="text-textSecondary hover:text-secondary transition-colors duration-300">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/rohan-rai-9bb78a327/" target="_blank" class="text-textSecondary hover:text-secondary transition-colors duration-300">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="https://twitter.com/yourusername" target="_blank" class="text-textSecondary hover:text-secondary transition-colors duration-300">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        // ScrollReveal animations
+        ScrollReveal().reveal('.animate-fade-in', {
+            delay: 200,
+            distance: '20px',
+            origin: 'bottom',
+            opacity: 0,
+            duration: 1000,
+            easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)',
+            interval: 50
+        });
+
+        ScrollReveal().reveal('.card', {
+            delay: 300,
+            distance: '20px',
+            origin: 'bottom',
+            opacity: 0,
+            duration: 1200,
+            easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)',
+            interval: 100
+        });
+
+        // Other existing JavaScript for navigation and form handling is in main.js
+    </script>
+</body>
+</html> 
