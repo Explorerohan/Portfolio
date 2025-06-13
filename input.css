@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .section-title {
+    @apply text-3xl font-bold text-textPrimary mb-4;
+  }
+  
+  .nav-link {
+    @apply text-textSecondary hover:text-secondary transition-colors duration-300;
+  }
+  
+  .card {
+    @apply bg-tertiary p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300;
+  }
+  
+  .btn-primary {
+    @apply px-6 py-2 bg-transparent border-2 border-secondary text-secondary rounded-md 
+    hover:bg-secondary/10 transition-all duration-300;
+  }
+  
+  .skill-tag {
+    @apply px-3 py-1 bg-tertiary text-secondary rounded-full text-sm;
+  }
+} 

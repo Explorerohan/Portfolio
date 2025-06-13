@@ -38,14 +38,72 @@ document.querySelectorAll('section').forEach(section => {
 });
 
 // Form submission handling
-const contactForm = document.querySelector('form');
-contactForm.addEventListener('submit', (e) => {
+const contactForm = document.getElementById('contact-form');
+const formStatus = document.getElementById('form-status');
+
+contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    // Add your form submission logic here
-    // For now, we'll just show an alert
-    alert('Thank you for your message! I will get back to you soon.');
-    contactForm.reset();
+    
+    // Show loading state
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.innerHTML;
+    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
+    submitButton.disabled = true;
+    
+    // Show status div
+    formStatus.classList.remove('hidden');
+    formStatus.textContent = 'Sending your message...';
+    formStatus.className = 'text-secondary';
+
+    try {
+        // Send email using EmailJS
+        const response = await emailjs.sendForm(
+            'service_aeuy70d', // We'll replace this with your actual service ID
+            'template_zvtvomc',
+            contactForm
+        );
+
+        // Show success message
+        displayMessage('Message sent successfully! I will get back to you soon.', 'success');
+        contactForm.reset();
+    } catch (error) {
+        // Show error message
+        displayMessage('Failed to send message. Please try again later.', 'error');
+        console.error('EmailJS error:', error);
+    } finally {
+        // Reset button state
+        submitButton.innerHTML = originalButtonText;
+        submitButton.disabled = false;
+    }
 });
+
+// Function to display messages
+function displayMessage(message, type) {
+    const messageContainer = document.createElement('div');
+    messageContainer.className = `fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 p-6 rounded-lg shadow-xl text-white text-center text-lg font-semibold transform transition-all duration-300 ease-out opacity-0 scale-90`;
+
+    if (type === 'success') {
+        messageContainer.classList.add('bg-green-500');
+    } else if (type === 'error') {
+        messageContainer.classList.add('bg-red-500');
+    }
+
+    messageContainer.textContent = message;
+    document.body.appendChild(messageContainer);
+
+    // Animate in
+    setTimeout(() => {
+        messageContainer.classList.remove('opacity-0', 'scale-90');
+        messageContainer.classList.add('opacity-100', 'scale-100');
+    }, 10);
+
+    // Animate out and remove after 3 seconds
+    setTimeout(() => {
+        messageContainer.classList.remove('opacity-100', 'scale-100');
+        messageContainer.classList.add('opacity-0', 'scale-90');
+        messageContainer.addEventListener('transitionend', () => messageContainer.remove(), { once: true });
+    }, 3000);
+}
 
 // Dynamic skill tags animation
 const skillTags = document.querySelectorAll('.skill-tag');
