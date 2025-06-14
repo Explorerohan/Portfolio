@@ -236,4 +236,124 @@ function typeGreeting() {
 }
 
 // Start the greeting animation when the page loads
-window.addEventListener('load', typeGreeting); 
+window.addEventListener('load', typeGreeting);
+
+// Navbar glass effect handling
+const mainNav = document.getElementById('mainNav');
+const navBorder = document.getElementById('navBorder');
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+let lastScroll = 0;
+
+// Handle navbar scroll behavior with glass effect
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    // Adjust glass effect on scroll
+    if (currentScroll > 0) {
+        navBorder.style.transform = 'scaleX(1)';
+        mainNav.style.background = 'rgba(255, 255, 255, 0.1)';
+        mainNav.style.backdropFilter = 'blur(20px)';
+    } else {
+        navBorder.style.transform = 'scaleX(0)';
+        mainNav.style.background = 'transparent';
+        mainNav.style.backdropFilter = 'blur(0px)';
+    }
+    
+    // Hide navbar when scrolling down, show when scrolling up with smooth animation
+    if (currentScroll > lastScroll && currentScroll > 100) {
+        mainNav.style.transform = 'translateY(-100%)';
+    } else {
+        mainNav.style.transform = 'translateY(0)';
+    }
+    
+    lastScroll = currentScroll;
+});
+
+// Mobile menu handling with glass effect
+let isMenuOpen = false;
+
+mobileMenuBtn.addEventListener('click', () => {
+    isMenuOpen = !isMenuOpen;
+    
+    if (isMenuOpen) {
+        mobileMenu.style.transform = 'translateY(0)';
+        mobileMenu.style.background = 'rgba(255, 255, 255, 0.1)';
+        mobileMenu.style.backdropFilter = 'blur(20px)';
+        // Add stagger effect to menu items
+        document.querySelectorAll('.mobile-nav-item').forEach((item, index) => {
+            item.style.transitionDelay = `${index * 100}ms`;
+            item.style.transform = 'translateX(0)';
+        });
+    } else {
+        mobileMenu.style.transform = 'translateY(-100%)';
+        // Reset stagger effect
+        document.querySelectorAll('.mobile-nav-item').forEach(item => {
+            item.style.transitionDelay = '0ms';
+            item.style.transform = 'translateX(-100%)';
+        });
+    }
+});
+
+// Close mobile menu when clicking outside with smooth animation
+document.addEventListener('click', (e) => {
+    if (isMenuOpen && !mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        isMenuOpen = false;
+        mobileMenu.style.transform = 'translateY(-100%)';
+        document.querySelectorAll('.mobile-nav-item').forEach(item => {
+            item.style.transitionDelay = '0ms';
+            item.style.transform = 'translateX(-100%)';
+        });
+    }
+});
+
+// Add active state to navigation items with glass effect
+const sections = document.querySelectorAll('section');
+const navItems = document.querySelectorAll('.nav-item');
+
+window.addEventListener('scroll', () => {
+    let current = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        if (pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute('id');
+        }
+    });
+    
+    navItems.forEach(item => {
+        const underline = item.querySelector('div:last-child');
+        const background = item.querySelector('div:first-child');
+        
+        if (item.getAttribute('href').slice(1) === current) {
+            item.classList.add('text-white');
+            underline.style.transform = 'scaleX(1)';
+            background.style.transform = 'scale(1)';
+            background.style.background = 'rgba(255, 255, 255, 0.1)';
+        } else {
+            item.classList.remove('text-white');
+            underline.style.transform = 'scaleX(0)';
+            background.style.transform = 'scale(0)';
+            background.style.background = 'rgba(255, 255, 255, 0.05)';
+        }
+    });
+});
+
+// Add hover effect to mobile menu items with glass effect
+document.querySelectorAll('.mobile-nav-item').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        const gradient = item.querySelector('div');
+        gradient.style.transform = 'translateX(0)';
+        gradient.style.background = 'rgba(255, 255, 255, 0.1)';
+    });
+    
+    item.addEventListener('mouseleave', () => {
+        if (!isMenuOpen) {
+            const gradient = item.querySelector('div');
+            gradient.style.transform = 'translateX(-100%)';
+            gradient.style.background = 'rgba(255, 255, 255, 0.05)';
+        }
+    });
+}); 

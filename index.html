@@ -10,36 +10,33 @@
 </head>
 <body class="bg-primary text-textPrimary min-h-screen">
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-primary/95 backdrop-blur-sm shadow-lg">
-        <div class="container mx-auto px-6">
-            <div class="flex justify-between items-center h-20">
-                <a href="#" class="text-2xl font-bold text-secondary relative group">
-                    Rohan Rai
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full"></span>
+    <nav class="fixed top-10 left-1/2 -translate-x-1/2 z-50 bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 shadow-lg px-8 py-3 max-w-[39rem] w-full">
+        <div class="flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="text-2xl font-bold text-gray-800">
+                <span id="navbarTitle">Rohan Rai</span>
+            </a>
+
+            <!-- Icons -->
+            <div class="flex items-center space-x-6">
+                <a href="https://www.linkedin.com/in/rohan-rai-9bb78a327/" class="text-gray-800" target="_blank">
+                    <!-- LinkedIn Icon -->
+                    <i class="fab fa-linkedin text-xl"></i>
                 </a>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#projects" class="nav-link group relative text-textSecondary hover:text-secondary transition-colors duration-300">
-                        Projects
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="#skills" class="nav-link group relative text-textSecondary hover:text-secondary transition-colors duration-300">
-                        Skills
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="#contact" class="nav-link group relative text-textSecondary hover:text-secondary transition-colors duration-300">
-                        Contact
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                </div>
-                <button class="md:hidden text-textSecondary hover:text-secondary transition-colors duration-300">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
+                <a href="https://github.com/Explorerohan" class="text-gray-800" target="_blank">
+                    <!-- GitHub Icon -->
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+                <a href="#contact" class="text-gray-800">
+                    <!-- Email Icon -->
+                    <i class="fas fa-envelope text-xl"></i>
+                </a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-primary to-primary/95">
+    <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-primary to-primary/95">
         <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMDIwMjAiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0YzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10"></div>
         <div class="container mx-auto px-6 relative z-10">
             <div class="max-w-4xl mx-auto text-center">
@@ -328,32 +325,32 @@
             <h2 class="text-3xl md:text-4xl font-bold text-center text-textPrimary mb-16">Get In Touch</h2>
             
             <div class="max-w-4xl mx-auto">
-                <div class="bg-white rounded-xl shadow-lg p-8 md:p-12">
+                <div class="bg-white/60 backdrop-blur-lg rounded-xl border border-white/20 shadow-xl p-8 md:p-12">
                     <form id="contact-form" class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="relative">
-                                <input type="text" id="name" name="user_name" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-300" placeholder="Your Name">
-                                <label for="name" class="absolute left-4 -top-2.5 bg-white px-2 text-sm text-textSecondary">Name</label>
+                                <input type="text" id="name" name="user_name" required class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-300" placeholder="Your Name">
+                                <label for="name" class="absolute left-4 -top-2.5 bg-transparent px-2 text-sm text-textSecondary">Name</label>
                             </div>
                             <div class="relative">
-                                <input type="email" id="email" name="user_email" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-300" placeholder="Your Email">
-                                <label for="email" class="absolute left-4 -top-2.5 bg-white px-2 text-sm text-textSecondary">Email</label>
+                                <input type="email" id="email" name="user_email" required class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-300" placeholder="Your Email">
+                                <label for="email" class="absolute left-4 -top-2.5 bg-transparent px-2 text-sm text-textSecondary">Email</label>
                             </div>
-                        </div>
+                    </div>
                         <div class="relative">
-                            <input type="text" id="subject" name="subject" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-300" placeholder="Subject">
-                            <label for="subject" class="absolute left-4 -top-2.5 bg-white px-2 text-sm text-textSecondary">Subject</label>
-                        </div>
+                            <input type="text" id="subject" name="subject" required class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-300" placeholder="Subject">
+                            <label for="subject" class="absolute left-4 -top-2.5 bg-transparent px-2 text-sm text-textSecondary">Subject</label>
+                    </div>
                         <div class="relative">
-                            <textarea id="message" name="message" rows="6" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-300" placeholder="Your Message"></textarea>
-                            <label for="message" class="absolute left-4 -top-2.5 bg-white px-2 text-sm text-textSecondary">Message</label>
-                        </div>
+                            <textarea id="message" name="message" rows="6" required class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-300" placeholder="Your Message"></textarea>
+                            <label for="message" class="absolute left-4 -top-2.5 bg-transparent px-2 text-sm text-textSecondary">Message</label>
+                    </div>
                         <div id="form-status" class="hidden text-center"></div>
                         <button type="submit" class="w-full md:w-auto px-8 py-3 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors duration-300 transform hover:scale-105">
                             Send Message
                             <i class="fas fa-paper-plane ml-2"></i>
                         </button>
-                    </form>
+                </form>
                 </div>
             </div>
         </div>
@@ -391,28 +388,77 @@
         })();
     </script>
     <script>
-        // ScrollReveal animations
-        ScrollReveal().reveal('.animate-fade-in', {
-            delay: 200,
-            distance: '20px',
-            origin: 'bottom',
-            opacity: 0,
-            duration: 1000,
-            easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)',
-            interval: 50
+        const sections = document.querySelectorAll('section[id]');
+        const navbarTitle = document.getElementById('navbarTitle');
+
+        const updateNavbarTitle = () => {
+            let activeSectionId = 'hero'; // Default to hero if nothing else is active
+
+            // Iterate through sections from the last one to the first one
+            // This helps prioritize sections higher on the page when multiple are partially visible
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const section = sections[i];
+                const rect = section.getBoundingClientRect();
+
+                // A section is considered 'active' if its top is at or above the viewport's top
+                // (allowing for a small margin like 0 or 1 to ensure the heading is in view)
+                // AND its bottom is still below the viewport's top (meaning some content is visible).
+                if (rect.top <= 1 && rect.bottom > 1) { // 1px buffer for 'at or above the top'
+                    activeSectionId = section.id;
+                    break; // Found the highest section that meets criteria, so stop
+                }
+            }
+
+            // Special case for when at the very top of the page (before any section top hits 1px)
+            if (window.scrollY === 0) {
+                activeSectionId = 'hero';
+            }
+
+            // Update the navbar title based on the active section
+            let titleText = '';
+            switch (activeSectionId) {
+                case 'hero':
+                    titleText = 'Rohan Rai';
+                    break;
+                case 'projects':
+                    titleText = 'Projects';
+                    break;
+                case 'skills':
+                    titleText = 'Skills';
+                    break;
+                case 'contact':
+                    titleText = 'Contact';
+                    break;
+                default:
+                    titleText = 'mySelf'; // Fallback if no specific section is active
+            }
+            navbarTitle.textContent = titleText;
+        };
+
+        // Observe all sections with a simple IntersectionObserver
+        // Its purpose is primarily to trigger updateNavbarTitle efficiently, not to define active section itself.
+        const observerOptions = {
+            root: null, // Use the viewport as the root
+            rootMargin: '0px',
+            threshold: 0 // Fire as soon as any part of the element enters or exits the viewport
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            // The Intersection Observer just triggers the update function
+            updateNavbarTitle();
+        }, observerOptions);
+
+        // Attach observer to all sections
+        sections.forEach(section => {
+            observer.observe(section);
         });
 
-        ScrollReveal().reveal('.card', {
-            delay: 300,
-            distance: '20px',
-            origin: 'bottom',
-            opacity: 0,
-            duration: 1200,
-            easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)',
-            interval: 100
-        });
+        // Also, attach the update function to scroll and DOMContentLoaded events
+        // This ensures updates even if IntersectionObserver doesn't fire immediately (e.g., rapid scroll)
+        document.addEventListener('DOMContentLoaded', updateNavbarTitle);
+        window.addEventListener('scroll', updateNavbarTitle);
+        window.addEventListener('load', updateNavbarTitle); // Ensure accurate initial load after all content is loaded
 
-        // Other existing JavaScript for navigation and form handling is in main.js
     </script>
 </body>
 </html> 
