@@ -169,7 +169,7 @@ function showFormStatus(message, type) {
             centralNotification.classList.add('notification-info');
             break;
     }
-
+    
     // Show the notification with animation
     centralNotification.classList.add('notification-show');
 
@@ -392,5 +392,122 @@ if (heroSection) {
 
     observerHero.observe(heroSection);
 }
+
+// Certificate Modal functionality
+const certificateModal = document.getElementById('certificateModal');
+const modalImage = document.getElementById('modalImage');
+const closeModalBtn = document.getElementById('closeModal');
+const certificatesGrid = document.getElementById('certificatesGrid');
+
+if (certificatesGrid) {
+    certificatesGrid.addEventListener('click', (e) => {
+        const clickedItem = e.target.closest('.certificate-item img');
+        if (clickedItem) {
+            const fullSrc = clickedItem.getAttribute('data-fullsrc');
+            if (fullSrc) {
+                modalImage.src = fullSrc;
+                
+                // Get the position and size of the clicked thumbnail
+                const rect = clickedItem.getBoundingClientRect();
+
+                // Set initial transform for the modal image to match the thumbnail
+                // We apply it to the modal's inner div, not the modal itself, for better control
+                const modalContent = certificateModal.querySelector('div');
+
+                // Calculate scale and position to match the thumbnail
+                const scaleX = rect.width / modalImage.offsetWidth;
+                const scaleY = rect.height / modalImage.offsetHeight;
+                const translateX = rect.left - modalContent.getBoundingClientRect().left + (rect.width - modalImage.offsetWidth) / 2; // Adjust for centering
+                const translateY = rect.top - modalContent.getBoundingClientRect().top + (rect.height - modalImage.offsetHeight) / 2; // Adjust for centering
+
+                modalContent.style.transition = 'none'; // Disable transition for initial positioning
+                modalContent.style.transform = `translate(${translateX}px, ${translateY}px) scaleX(${scaleX}) scaleY(${scaleY})`;
+                modalContent.style.opacity = '0'; // Start hidden
+                certificateModal.classList.add('show-modal'); // Make modal visible but content still scaled/hidden
+
+                // Force reflow to ensure initial transform is applied
+                void modalContent.offsetWidth;
+
+                // Animate to final state
+                modalContent.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'; // Smooth transition
+                modalContent.style.transform = 'translateY(0) scale(1)';
+                modalContent.style.opacity = '1';
+            }
+        }
+    });
+}
+
+if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', () => {
+        certificateModal.classList.remove('show-modal');
+        // Reset modal content transform after closing for next opening
+        const modalContent = certificateModal.querySelector('div');
+        modalContent.style.transition = 'none';
+        modalContent.style.transform = 'scale(0.9) translateY(-4px)'; // Default hidden state
+        modalContent.style.opacity = '0';
+    });
+}
+
+if (certificateModal) {
+    // Close modal when clicking outside the image
+    certificateModal.addEventListener('click', (e) => {
+        if (e.target === certificateModal) {
+            certificateModal.classList.remove('show-modal');
+            // Reset modal content transform after closing for next opening
+            const modalContent = certificateModal.querySelector('div');
+            modalContent.style.transition = 'none';
+            modalContent.style.transform = 'scale(0.9) translateY(-4px)'; // Default hidden state
+            modalContent.style.opacity = '0';
+        }
+    });
+}
+
+// Add 'certificates' to navbar title updates
+const updateNavbarTitleOriginal = typeof updateNavbarTitle !== 'undefined' ? updateNavbarTitle : null; // Store original for re-use if needed
+updateNavbarTitle = () => {
+    let activeSectionId = 'hero';
+
+    // Get all sections again inside this function to ensure it's up-to-date after DOM changes
+    const allSections = document.querySelectorAll('section[id]');
+
+    for (let i = allSections.length - 1; i >= 0; i--) {
+        const section = allSections[i];
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 25 && rect.bottom > 0) { // Adjusted condition to 25px from top for a very precise change before the heading is fully at the top
+            activeSectionId = section.id;
+            break;
+        }
+    }
+
+    if (window.scrollY === 0) {
+        activeSectionId = 'hero';
+    }
+
+    let titleText = '';
+    switch (activeSectionId) {
+        case 'hero':
+            titleText = 'Rohan Rai';
+            break;
+        case 'projects':
+            titleText = 'Projects';
+            break;
+        case 'certificates':
+            titleText = 'Certificates';
+            break;
+        case 'skills':
+            titleText = 'Skills';
+            break;
+        case 'contact':
+            titleText = 'Contact';
+            break;
+        default:
+            titleText = 'mySelf';
+    }
+    navbarTitle.textContent = titleText;
+};
+
+// Re-trigger observer and scroll listeners after DOMContentLoaded
+document.addEventListener('scroll', updateNavbarTitle);
+window.addEventListener('load', updateNavbarTitle);
 
 }); 

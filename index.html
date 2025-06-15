@@ -162,6 +162,40 @@
         .notification-info .w-16.h-1.mx-auto.rounded-full {
             background-color: #4a90e2; /* Tailwind secondary color */
         }
+
+        /* Certificate Carousel Styles */
+        #carouselTrack img {
+            width: 100%;
+            height: auto;
+        }
+
+        #carouselDots .dot.active {
+            background-color: var(--secondary); /* Use your secondary color */
+        }
+
+        /* Certificate Grid and Modal Styles */
+        .certificate-item img {
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            cursor: pointer;
+        }
+
+        .certificate-item:hover img {
+            transform: scale(1.05);
+            filter: brightness(0.8); /* Slight darkening on hover */
+        }
+
+        #certificateModal.show-modal {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        #certificateModal.show-modal > div {
+            transform: scale(1) !important;
+            opacity: 1 !important;
+        }
     </style>
 </head>
 <body class="bg-primary text-textPrimary min-h-screen">
@@ -342,6 +376,39 @@
             </div>
         </div>
     </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="py-20 bg-primary/95">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-textPrimary mb-16">My Certificates</h2>
+
+            <!-- Certificates Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto" id="certificatesGrid">
+                <div class="certificate-item cursor-pointer rounded-xl overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-102 hover:shadow-xl bg-white/5">
+                    <img src="assets/Machine learning for natural language processing.png" alt="Machine Learning Certificate" class="w-full h-auto object-cover" data-fullsrc="assets/Machine learning for natural language processing.png">
+                </div>
+                <div class="certificate-item cursor-pointer rounded-xl overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-102 hover:shadow-xl bg-white/5">
+                    <img src="assets/data engineering.png" alt="Data Engineering Certificate" class="w-full h-auto object-cover" data-fullsrc="assets/data engineering.png">
+                </div>
+                <div class="certificate-item cursor-pointer rounded-xl overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-102 hover:shadow-xl bg-white/5">
+                    <img src="assets/cloud foundation.png" alt="Cloud Foundation Certificate" class="w-full h-auto object-cover" data-fullsrc="assets/cloud foundation.png">
+                </div>
+                <div class="certificate-item cursor-pointer rounded-xl overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-102 hover:shadow-xl bg-white/5">
+                    <img src="assets/machine learning.png" alt="General Machine Learning Certificate" class="w-full h-auto object-cover" data-fullsrc="assets/machine learning.png">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Modal -->
+    <div id="certificateModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-[1000] opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="relative bg-white rounded-lg shadow-2xl p-2 max-w-5xl max-h-[90vh] overflow-hidden transform scale-90 opacity-0 transition-all duration-300 ease-out">
+            <img id="modalImage" src="" alt="Full Certificate" class="w-full h-full object-contain max-h-[85vh] mx-auto">
+            <button id="closeModal" class="absolute top-2 right-2 bg-gray-800 text-white rounded-full p-2 hover:bg-gray-700 transition-colors duration-200 focus:outline-none">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
 
     <!-- Skills Section -->
     <section id="skills" class="py-20">
