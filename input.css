@@ -23,4 +23,186 @@
   .skill-tag {
     @apply px-3 py-1 bg-tertiary text-secondary rounded-full text-sm;
   }
+
+  /* Certificate Story Timeline Styles */
+  .certificate-story {
+    perspective: 2000px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .timeline-item {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 2;
+  }
+
+  .timeline-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .timeline-item:nth-child(1) { transition-delay: 0.1s; }
+  .timeline-item:nth-child(2) { transition-delay: 0.2s; }
+  .timeline-item:nth-child(3) { transition-delay: 0.3s; }
+  .timeline-item:nth-child(4) { transition-delay: 0.4s; }
+
+  .timeline-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .timeline-track {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(0, 0, 0, 0.1);
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+
+  .timeline-marker {
+    width: 4px !important;
+    height: 4px !important;
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    box-shadow: none !important;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+  }
+
+  .timeline-marker::before {
+    display: none;
+  }
+
+  .timeline-item:hover .timeline-marker {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    transform: translate(-50%, -50%) scale(1.5) !important;
+  }
+
+  .timeline-dot {
+    box-shadow: 0 0 0 4px rgba(var(--secondary-rgb), 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .timeline-dot::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(var(--secondary-rgb), 0.2) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .timeline-item:hover .timeline-dot::before {
+    opacity: 1;
+  }
+
+  .timeline-description {
+    position: relative;
+    z-index: 2;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .certificate-card {
+    position: relative;
+    z-index: 2;
+    background: transparent;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .certificate-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(45deg, var(--secondary), transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .certificate-card:hover::before {
+    opacity: 1;
+  }
+
+  /* Ensure text is visible */
+  .timeline-date {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .timeline-description p {
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  h3 {
+    color: rgba(0, 0, 0, 0.9);
+  }
+
+  /* Remove background adjustments */
+  #certificates {
+    position: relative;
+    background: transparent;
+    overflow: visible;
+  }
+
+  #certificates::before {
+    display: none;
+  }
+
+  /* Hover effects */
+  .timeline-description:hover {
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .certificate-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .timeline-content {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .timeline-content > div {
+      width: 100% !important;
+      padding: 0 !important;
+      text-align: center !important;
+    }
+
+    .timeline-marker {
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+    }
+
+    .timeline-track {
+      left: 50% !important;
+    }
+
+    .certificate-card {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
 } 

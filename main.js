@@ -510,4 +510,138 @@ updateNavbarTitle = () => {
 document.addEventListener('scroll', updateNavbarTitle);
 window.addEventListener('load', updateNavbarTitle);
 
+// Certificate Story Timeline
+document.addEventListener('DOMContentLoaded', function() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    const modal = document.getElementById('certificateModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeModal = document.getElementById('closeModal');
+    const downloadBtn = document.getElementById('downloadCertificate');
+    const viewButtons = document.querySelectorAll('.view-certificate-btn');
+
+    // Make sure all timeline items are visible initially
+    timelineItems.forEach(item => {
+        item.style.opacity = '1';
+        item.style.transform = 'translateY(0)';
+    });
+
+    // Intersection Observer for timeline items
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    // Observe each timeline item
+    timelineItems.forEach(item => {
+        observer.observe(item);
+    });
+
+    // Modal functionality
+    function openModal(imageSrc) {
+        modalImage.src = imageSrc;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Add entrance animation
+        modalImage.style.animation = 'float 3s ease-in-out infinite';
+    }
+
+    function closeModalHandler() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        modalImage.style.animation = '';
+    }
+
+    // Event Listeners
+    viewButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const card = e.target.closest('.certificate-card');
+            const image = card.querySelector('img');
+            openModal(image.src);
+        });
+    });
+
+    closeModal.addEventListener('click', closeModalHandler);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModalHandler();
+    });
+
+    // Download functionality
+    downloadBtn.addEventListener('click', () => {
+        const link = document.createElement('a');
+        link.href = modalImage.src;
+        link.download = `certificate-${Date.now()}.png`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModalHandler();
+        }
+    });
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('a[href^="#certificates"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Enhanced hover effects for timeline markers
+    timelineItems.forEach(item => {
+        const marker = item.querySelector('.timeline-marker');
+        const description = item.querySelector('.timeline-description');
+        
+        item.addEventListener('mouseenter', () => {
+            marker.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            description.style.transform = 'translateY(-5px)';
+        });
+
+        item.addEventListener('mouseleave', () => {
+            marker.style.transform = 'translate(-50%, -50%) scale(1)';
+            description.style.transform = 'translateY(0)';
+        });
+    });
+
+    // Parallax effect for certificate cards
+    timelineItems.forEach(item => {
+        const card = item.querySelector('.certificate-card');
+        
+        item.addEventListener('mousemove', (e) => {
+            const rect = item.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+        });
+
+        item.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+        });
+    });
+});
+
 }); 
