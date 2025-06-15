@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', function() {
 // Mobile menu toggle
 const menuButton = document.querySelector('button.md\\:hidden');
 const navLinks = document.querySelector('.hidden.md\\:flex');
@@ -37,12 +38,59 @@ document.querySelectorAll('section').forEach(section => {
     observer.observe(section);
 });
 
-// Form submission handling
+// Form validation and submission handling
 const contactForm = document.getElementById('contact-form');
 const formStatus = document.getElementById('form-status');
+const inputs = contactForm.querySelectorAll('input:not([type="checkbox"]), textarea');
+
+// Add input validation styles
+inputs.forEach(input => {
+    input.addEventListener('input', function() {
+        validateInput(this);
+    });
+
+    input.addEventListener('blur', function() {
+        validateInput(this);
+    });
+});
+
+function validateInput(input) {
+    const isValid = input.checkValidity();
+    const isDirty = input.value.length > 0;
+    
+    if (isDirty) {
+        if (isValid) {
+            input.classList.remove('border-red-500');
+            input.classList.add('border-green-500');
+        } else {
+            input.classList.remove('border-green-500');
+            input.classList.add('border-red-500');
+        }
+    } else {
+        input.classList.remove('border-red-500', 'border-green-500');
+    }
+}
 
 contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    
+    // Basic validation for required fields
+    let isValid = true;
+    inputs.forEach(input => {
+        if (input.hasAttribute('required') && input.value.trim() === '') {
+            isValid = false;
+            input.classList.add('border-red-500'); // Highlight empty required fields
+        } else {
+            input.classList.remove('border-red-500');
+        }
+    });
+
+    if (!isValid) {
+        formStatus.textContent = 'Please fill in all required fields.';
+        formStatus.className = 'error';
+        formStatus.style.display = 'block';
+        return;
+    }
     
     // Show loading state
     const submitButton = contactForm.querySelector('button[type="submit"]');
@@ -51,25 +99,44 @@ contactForm.addEventListener('submit', async (e) => {
     submitButton.disabled = true;
     
     // Show status div
-    formStatus.classList.remove('hidden');
-    formStatus.textContent = 'Sending your message...';
-    formStatus.className = 'text-secondary';
+    showFormStatus('Sending your message...', 'info');
+
+    // Log form data for debugging
+    const formData = new FormData(contactForm);
+    console.log('Form data being sent:', {
+        user_name: formData.get('user_name'),
+        user_email: formData.get('user_email'),
+        subject: formData.get('subject'),
+        message: formData.get('message')
+    });
 
     try {
+        console.log('Attempting to send email with EmailJS...');
         // Send email using EmailJS
         const response = await emailjs.sendForm(
-            'service_aeuy70d', // We'll replace this with your actual service ID
+            'service_aeuy70d',
             'template_zvtvomc',
             contactForm
         );
+        console.log('EmailJS response:', response);
 
         // Show success message
-        displayMessage('Message sent successfully! I will get back to you soon.', 'success');
+        showFormStatus('Message sent successfully! I will get back to you soon.', 'success');
         contactForm.reset();
+        
+        // Reset input styles
+        inputs.forEach(input => {
+            input.classList.remove('border-red-500', 'border-green-500');
+        });
     } catch (error) {
         // Show error message
-        displayMessage('Failed to send message. Please try again later.', 'error');
         console.error('EmailJS error:', error);
+        console.error('Error details:', {
+            text: error.text,
+            status: error.status,
+            message: error.message
+        });
+        showFormStatus('Failed to send message. Please try again later.', 'error');
     } finally {
         // Reset button state
         submitButton.innerHTML = originalButtonText;
@@ -77,32 +144,44 @@ contactForm.addEventListener('submit', async (e) => {
     }
 });
 
-// Function to display messages
-function displayMessage(message, type) {
-    const messageContainer = document.createElement('div');
-    messageContainer.className = `fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 p-6 rounded-lg shadow-xl text-white text-center text-lg font-semibold transform transition-all duration-300 ease-out opacity-0 scale-90`;
+function showFormStatus(message, type) {
+    const centralNotification = document.getElementById('centralNotification');
+    const notificationMessage = document.getElementById('notificationMessage');
+    const notificationAccent = document.getElementById('notificationAccent');
 
-    if (type === 'success') {
-        messageContainer.classList.add('bg-green-500');
-    } else if (type === 'error') {
-        messageContainer.classList.add('bg-red-500');
+    // Clear previous classes and content for form-status (the old one)
+    formStatus.textContent = '';
+    formStatus.classList.add('hidden');
+
+    // Set message and type for the new central notification
+    notificationMessage.textContent = message;
+    centralNotification.className = 'fixed inset-0 flex items-center justify-center p-4 z-[999] pointer-events-none opacity-0 transition-opacity duration-300'; // Reset classes
+    notificationAccent.className = 'w-16 h-1 mx-auto rounded-full'; // Reset accent classes
+
+    switch(type) {
+        case 'success':
+            centralNotification.classList.add('notification-success');
+            break;
+        case 'error':
+            centralNotification.classList.add('notification-error');
+            break;
+        case 'info':
+            centralNotification.classList.add('notification-info');
+            break;
     }
 
-    messageContainer.textContent = message;
-    document.body.appendChild(messageContainer);
+    // Show the notification with animation
+    centralNotification.classList.add('notification-show');
 
-    // Animate in
+    // Hide notification after 4 seconds
     setTimeout(() => {
-        messageContainer.classList.remove('opacity-0', 'scale-90');
-        messageContainer.classList.add('opacity-100', 'scale-100');
-    }, 10);
-
-    // Animate out and remove after 3 seconds
-    setTimeout(() => {
-        messageContainer.classList.remove('opacity-100', 'scale-100');
-        messageContainer.classList.add('opacity-0', 'scale-90');
-        messageContainer.addEventListener('transitionend', () => messageContainer.remove(), { once: true });
-    }, 3000);
+        centralNotification.classList.remove('notification-show');
+        // Optional: clear message after fade out
+        setTimeout(() => {
+            notificationMessage.textContent = '';
+            notificationAccent.className = 'w-16 h-1 mx-auto rounded-full'; // Reset accent classes
+        }, 300); // Match transition duration
+    }, 4000);
 }
 
 // Dynamic skill tags animation
@@ -168,81 +247,22 @@ window.addEventListener('scroll', () => {
             underline.classList.add('w-0');
         }
         
-        // Add active state to current section's link
-        if (item.getAttribute('href').slice(1) === current) {
+        const href = item.getAttribute('href');
+        if (href && current && href.includes(current)) {
             item.classList.add('text-secondary');
-            const underline = item.querySelector('span');
             if (underline) {
-                underline.classList.remove('w-0');
                 underline.classList.add('w-full');
+                underline.classList.remove('w-0');
             }
         }
     });
 });
 
-// Greeting animation for hero section
-const greetings = [
-    "Hello",
-    "नमस्ते", // Hindi
-    "你好", // Chinese
-    "こんにちは", // Japanese
-    "안녕하세요", // Korean
-    "Hola", // Spanish
-    "Bonjour", // French
-    "Guten Tag", // German
-    "Ciao", // Italian
-    "Olá", // Portuguese
-    "Привет", // Russian
-    "مرحبا", // Arabic
-    "สวัสดี", // Thai
-    "Xin chào", // Vietnamese
-    "Merhaba" // Turkish
-];
-
-let currentGreetingIndex = 0;
-let currentGreetingCharIndex = 0;
-let isDeletingGreeting = false;
-let greetingDelay = 100;
-const animatedGreeting = document.querySelector('.animated-greeting');
-
-function typeGreeting() {
-    const currentGreeting = greetings[currentGreetingIndex];
-    
-    if (isDeletingGreeting) {
-        // Remove characters
-        animatedGreeting.textContent = currentGreeting.substring(0, currentGreetingCharIndex - 1);
-        currentGreetingCharIndex--;
-        greetingDelay = 50; // Faster when deleting
-    } else {
-        // Add characters
-        animatedGreeting.textContent = currentGreeting.substring(0, currentGreetingCharIndex + 1);
-        currentGreetingCharIndex++;
-        greetingDelay = 150; // Slightly slower for non-Latin characters
-    }
-
-    // If greeting is complete
-    if (!isDeletingGreeting && currentGreetingCharIndex === currentGreeting.length) {
-        // Pause at the end
-        greetingDelay = 2000;
-        isDeletingGreeting = true;
-    } else if (isDeletingGreeting && currentGreetingCharIndex === 0) {
-        // Move to next greeting
-        isDeletingGreeting = false;
-        currentGreetingIndex = (currentGreetingIndex + 1) % greetings.length;
-        greetingDelay = 500; // Pause before typing next greeting
-    }
-
-    setTimeout(typeGreeting, greetingDelay);
-}
-
-// Start the greeting animation when the page loads
-window.addEventListener('load', typeGreeting);
-
 // Navbar glass effect handling
-const mainNav = document.getElementById('mainNav');
 const navBorder = document.getElementById('navBorder');
+const mainNav = document.getElementById('mainNav'); // Assuming you have a main nav element with this ID
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
+const mobileMenu = document.getElementById('mobileMenu'); // Assuming you have a mobile menu element with this ID
 let lastScroll = 0;
 
 // Handle navbar scroll behavior with glass effect
@@ -275,85 +295,102 @@ let isMenuOpen = false;
 
 mobileMenuBtn.addEventListener('click', () => {
     isMenuOpen = !isMenuOpen;
-    
     if (isMenuOpen) {
-        mobileMenu.style.transform = 'translateY(0)';
-        mobileMenu.style.background = 'rgba(255, 255, 255, 0.1)';
-        mobileMenu.style.backdropFilter = 'blur(20px)';
-        // Add stagger effect to menu items
-        document.querySelectorAll('.mobile-nav-item').forEach((item, index) => {
-            item.style.transitionDelay = `${index * 100}ms`;
-            item.style.transform = 'translateX(0)';
-        });
+        mobileMenu.classList.remove('hidden');
+        mobileMenu.classList.add('flex', 'flex-col');
+        mainNav.style.background = 'rgba(255, 255, 255, 0.1)'; // Apply glass effect when open
+        mainNav.style.backdropFilter = 'blur(20px)';
     } else {
-        mobileMenu.style.transform = 'translateY(-100%)';
-        // Reset stagger effect
-        document.querySelectorAll('.mobile-nav-item').forEach(item => {
-            item.style.transitionDelay = '0ms';
-            item.style.transform = 'translateX(-100%)';
-        });
+        mobileMenu.classList.remove('flex', 'flex-col');
+        mobileMenu.classList.add('hidden');
+        // Revert to scroll-based glass effect if menu is closed and not scrolled
+        if (window.pageYOffset === 0) {
+            mainNav.style.background = 'transparent';
+            mainNav.style.backdropFilter = 'blur(0px)';
+        }
     }
 });
 
-// Close mobile menu when clicking outside with smooth animation
-document.addEventListener('click', (e) => {
-    if (isMenuOpen && !mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-        isMenuOpen = false;
-        mobileMenu.style.transform = 'translateY(-100%)';
-        document.querySelectorAll('.mobile-nav-item').forEach(item => {
-            item.style.transitionDelay = '0ms';
-            item.style.transform = 'translateX(-100%)';
-        });
+// Animated Greeting (from index.html, moved here)
+const greetings = [
+    "Hello", // English
+    "你好", // Chinese
+    "こんにちは", // Japanese
+    "안녕하세요", // Korean
+    "Hola", // Spanish
+    "Bonjour", // French
+    "Guten Tag", // German
+    "Ciao", // Italian
+    "Olá", // Portuguese
+    "Привет", // Russian
+    "مرحبا", // Arabic
+    "สวัสดี", // Thai
+    "Xin chào", // Vietnamese
+    "Merhaba" // Turkish
+];
+
+let currentGreetingIndex = 0;
+let currentGreetingCharIndex = 0;
+let isDeletingGreeting = false;
+let greetingDelay = 100;
+const animatedGreeting = document.querySelector('.animated-greeting');
+
+function typeGreeting() {
+    if (!animatedGreeting) return; // Ensure element exists
+
+    const currentGreeting = greetings[currentGreetingIndex];
+    
+    if (isDeletingGreeting) {
+        // Remove characters
+        animatedGreeting.textContent = currentGreeting.substring(0, currentGreetingCharIndex - 1);
+        currentGreetingCharIndex--;
+        greetingDelay = 50; // Faster when deleting
+    } else {
+        // Add characters
+        animatedGreeting.textContent = currentGreeting.substring(0, currentGreetingCharIndex + 1);
+        currentGreetingCharIndex++;
+        greetingDelay = 150; // Slightly slower for non-Latin characters
     }
-});
 
-// Add active state to navigation items with glass effect
-const sections = document.querySelectorAll('section');
-const navItems = document.querySelectorAll('.nav-item');
+    // If greeting is complete
+    if (!isDeletingGreeting && currentGreetingCharIndex === currentGreeting.length) {
+        // Pause at the end
+        greetingDelay = 2000;
+        isDeletingGreeting = true;
+    } else if (isDeletingGreeting && currentGreetingCharIndex === 0) {
+        // Move to next greeting
+        isDeletingGreeting = false;
+        currentGreetingIndex = (currentGreetingIndex + 1) % greetings.length;
+        greetingDelay = 500; // Pause before typing next greeting
+    }
 
-window.addEventListener('scroll', () => {
-    let current = '';
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        if (pageYOffset >= sectionTop - 200) {
-            current = section.getAttribute('id');
-        }
-    });
-    
-    navItems.forEach(item => {
-        const underline = item.querySelector('div:last-child');
-        const background = item.querySelector('div:first-child');
-        
-        if (item.getAttribute('href').slice(1) === current) {
-            item.classList.add('text-white');
-            underline.style.transform = 'scaleX(1)';
-            background.style.transform = 'scale(1)';
-            background.style.background = 'rgba(255, 255, 255, 0.1)';
-        } else {
-            item.classList.remove('text-white');
-            underline.style.transform = 'scaleX(0)';
-            background.style.transform = 'scale(0)';
-            background.style.background = 'rgba(255, 255, 255, 0.05)';
-        }
-    });
-});
+    setTimeout(typeGreeting, greetingDelay);
+}
 
-// Add hover effect to mobile menu items with glass effect
-document.querySelectorAll('.mobile-nav-item').forEach(item => {
-    item.addEventListener('mouseenter', () => {
-        const gradient = item.querySelector('div');
-        gradient.style.transform = 'translateX(0)';
-        gradient.style.background = 'rgba(255, 255, 255, 0.1)';
-    });
-    
-    item.addEventListener('mouseleave', () => {
-        if (!isMenuOpen) {
-            const gradient = item.querySelector('div');
-            gradient.style.transform = 'translateX(-100%)';
-            gradient.style.background = 'rgba(255, 255, 255, 0.05)';
-        }
-    });
+// Start the greeting animation when the page loads
+if (animatedGreeting) {
+    typeGreeting();
+}
+
+// Smooth scroll for hero section (from index.html, moved here)
+const heroSection = document.getElementById('hero');
+if (heroSection) {
+    const observerOptionsHero = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observerHero = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-fade-in-up');
+                observerHero.unobserve(entry.target);
+            }
+        });
+    }, observerOptionsHero);
+
+    observerHero.observe(heroSection);
+}
+
 }); 

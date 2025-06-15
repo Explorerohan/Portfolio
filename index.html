@@ -7,6 +7,162 @@
     <link href="./dist/output.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/scrollreveal"></script>
+    <style>
+        /* Form Animations and Styles */
+        .form-group {
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+
+        .form-group:focus-within {
+            transform: translateY(-2px);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            transition: all 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.1); /* Soft blue ring */
+            border-color: #4a90e2; /* Secondary color */
+        }
+
+        .form-group label {
+            transition: all 0.2s ease;
+        }
+
+        .form-group:focus-within label {
+            color: var(--secondary);
+        }
+
+        /* Button Animation */
+        #contact-form button {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        #contact-form button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            opacity: 0;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease-out, height 0.4s ease-out, opacity 0.4s ease-out;
+        }
+
+        #contact-form button:hover::after {
+            width: 150px;
+            height: 150px;
+            opacity: 1;
+        }
+
+        #contact-form button svg {
+            transition: transform 0.3s ease;
+        }
+
+        #contact-form button:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* Success Animation */
+        .form-success {
+            animation: successPulse 0.5s ease;
+        }
+
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* Error Animation */
+        .form-error {
+            animation: errorShake 0.5s ease;
+        }
+
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Status Message Styles */
+        #form-status {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        #form-status.success {
+            background-color: #ecfdf5;
+            color: #059669;
+            border: 1px solid #a7f3d0;
+        }
+
+        #form-status.error {
+            background-color: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+
+        /* Loading State */
+        .form-loading button {
+            position: relative;
+            color: transparent; /* Hide text during loading */
+            pointer-events: none; /* Disable button during loading */
+        }
+
+        .form-loading button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: button-loading 0.8s linear infinite;
+        }
+
+        @keyframes button-loading {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Central Notification Animations */
+        .notification-show {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        .notification-show > div {
+            transform: translateY(0) !important;
+            opacity: 1 !important;
+            scale: 1 !important;
+        }
+
+        .notification-success .w-16.h-1.mx-auto.rounded-full {
+            background-color: #059669; /* Tailwind green-600 */
+        }
+
+        .notification-error .w-16.h-1.mx-auto.rounded-full {
+            background-color: #dc2626; /* Tailwind red-600 */
+        }
+
+        .notification-info .w-16.h-1.mx-auto.rounded-full {
+            background-color: #4a90e2; /* Tailwind secondary color */
+        }
+    </style>
 </head>
 <body class="bg-primary text-textPrimary min-h-screen">
     <!-- Navigation -->
@@ -15,29 +171,44 @@
             <!-- Logo -->
             <a href="#" class="text-2xl font-bold text-gray-800">
                 <span id="navbarTitle">Rohan Rai</span>
-            </a>
+                </a>
 
             <!-- Icons -->
-            <div class="flex items-center space-x-6">
+            <div class="hidden md:flex items-center space-x-6" id="mainNav">
                 <a href="https://www.linkedin.com/in/rohan-rai-9bb78a327/" class="text-gray-800" target="_blank">
                     <!-- LinkedIn Icon -->
                     <i class="fab fa-linkedin text-xl"></i>
-                </a>
+                    </a>
                 <a href="https://github.com/Explorerohan" class="text-gray-800" target="_blank">
                     <!-- GitHub Icon -->
                     <i class="fab fa-github text-xl"></i>
-                </a>
+                    </a>
                 <a href="#contact" class="text-gray-800">
                     <!-- Email Icon -->
                     <i class="fas fa-envelope text-xl"></i>
                 </a>
             </div>
+
+            <!-- Mobile Menu Button (visible only on small screens) -->
+            <button id="mobileMenuBtn" class="md:hidden text-gray-800 text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Content (hidden by default, toggled by JS) -->
+        <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 w-full bg-white/90 backdrop-blur-xl rounded-b-lg shadow-lg py-4 px-6 space-y-4">
+            <!-- Mobile Nav Links -->
+            <a href="#projects" class="block text-gray-800 hover:text-secondary transition-colors duration-300">Projects</a>
+            <a href="#skills" class="block text-gray-800 hover:text-secondary transition-colors duration-300">Skills</a>
+            <a href="#contact" class="block text-gray-800 hover:text-secondary transition-colors duration-300">Contact</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-primary to-primary/95">
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMDIwMjAiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0YzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10"></div>
+        <!-- Background Image -->
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat z-0 opacity-100"></div>
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMDIwMjAiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0YzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHoiLz48L2g+PC9nPjwvc3ZnPg==')] opacity-10"></div>
         <div class="container mx-auto px-6 relative z-10">
             <div class="max-w-4xl mx-auto text-center">
                 <div class="mb-8">
@@ -320,36 +491,112 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gradient-to-br from-primary to-primary/95">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-textPrimary mb-16">Get In Touch</h2>
+    <section id="contact" class="py-20 bg-gradient-to-br from-primary/95 to-primary relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-textPrimary mb-3">
+                    Get in Touch
+                </h2>
+                <div class="w-20 h-1 bg-secondary mx-auto mb-4"></div>
+                <p class="text-textSecondary text-base max-w-md mx-auto">
+                    Have a project in mind? Let's discuss how we can work together.
+                </p>
+            </div>
             
-            <div class="max-w-4xl mx-auto">
-                <div class="bg-white/60 backdrop-blur-lg rounded-xl border border-white/20 shadow-xl p-8 md:p-12">
+            <div class="max-w-4xl mx-auto flex flex-col md:flex-row bg-white rounded-2xl shadow-xl overflow-hidden">
+                <!-- Illustration Section -->
+                <div class="md:w-1/2 w-full min-h-[300px] md:min-h-[auto] h-full">
+                    <!-- Replace with your actual illustration image -->
+                    <img src="assets/code.jpg" alt="Contact Illustration" class="w-full h-full object-cover">
+                </div>
+
+                <!-- Form Section -->
+                <div class="md:w-1/2 w-full p-8 md:p-12">
                     <form id="contact-form" class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="relative">
-                                <input type="text" id="name" name="user_name" required class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-300" placeholder="Your Name">
-                                <label for="name" class="absolute left-4 -top-2.5 bg-transparent px-2 text-sm text-textSecondary">Name</label>
+                        <div class="form-group">
+                            <label 
+                                for="name" 
+                                class="block text-sm font-medium text-gray-700 mb-1.5"
+                            >
+                                Name
+                            </label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="user_name" 
+                                required 
+                                class="w-full px-4 py-2.5 border border-gray-300 rounded-md
+                                focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary
+                                transition-colors duration-200 text-gray-900 text-base"
+                                placeholder="Enter Your Name"
+                            >
                             </div>
-                            <div class="relative">
-                                <input type="email" id="email" name="user_email" required class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-300" placeholder="Your Email">
-                                <label for="email" class="absolute left-4 -top-2.5 bg-transparent px-2 text-sm text-textSecondary">Email</label>
+                        <div class="form-group">
+                            <label 
+                                for="email" 
+                                class="block text-sm font-medium text-gray-700 mb-1.5"
+                            >
+                                E-mail
+                            </label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="user_email" 
+                                required 
+                                class="w-full px-4 py-2.5 border border-gray-300 rounded-md
+                                focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary
+                                transition-colors duration-200 text-gray-900 text-base"
+                                placeholder="Enter Your E-mail"
+                            >
                             </div>
+                        <div class="form-group">
+                            <label 
+                                for="subject" 
+                                class="block text-sm font-medium text-gray-700 mb-1.5"
+                            >
+                                Subject
+                            </label>
+                            <input 
+                                type="text" 
+                                id="subject" 
+                                name="subject" 
+                                required 
+                                class="w-full px-4 py-2.5 border border-gray-300 rounded-md
+                                focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary
+                                transition-colors duration-200 text-gray-900 text-base"
+                                placeholder="Enter Subject"
+                            >
                     </div>
-                        <div class="relative">
-                            <input type="text" id="subject" name="subject" required class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-300" placeholder="Subject">
-                            <label for="subject" class="absolute left-4 -top-2.5 bg-transparent px-2 text-sm text-textSecondary">Subject</label>
+                        <div class="form-group">
+                            <label 
+                                for="message" 
+                                class="block text-sm font-medium text-gray-700 mb-1.5"
+                            >
+                                Message
+                            </label>
+                            <textarea 
+                                id="message" 
+                                name="message" 
+                                rows="4" 
+                                required 
+                                class="w-full px-4 py-2.5 border border-gray-300 rounded-md
+                                focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary
+                                transition-colors duration-200 text-gray-900 text-base resize-none"
+                                placeholder="Write Your Message Here"
+                            ></textarea>
                     </div>
-                        <div class="relative">
-                            <textarea id="message" name="message" rows="6" required class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-300" placeholder="Your Message"></textarea>
-                            <label for="message" class="absolute left-4 -top-2.5 bg-transparent px-2 text-sm text-textSecondary">Message</label>
+                        <div id="form-status" class="hidden text-center text-sm font-medium mt-4"></div>
+                        <div class="flex justify-end pt-4">
+                            <button 
+                                type="submit" 
+                                class="inline-flex items-center justify-center px-6 py-3 bg-secondary 
+                                text-white text-base font-medium rounded-lg shadow-md
+                                transition-all duration-200 hover:bg-secondary/90 hover:shadow-lg
+                                focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:ring-offset-2"
+                            >
+                                Send a Message
+                            </button>
                     </div>
-                        <div id="form-status" class="hidden text-center"></div>
-                        <button type="submit" class="w-full md:w-auto px-8 py-3 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors duration-300 transform hover:scale-105">
-                            Send Message
-                            <i class="fas fa-paper-plane ml-2"></i>
-                        </button>
                 </form>
                 </div>
             </div>
@@ -380,85 +627,20 @@
 
     <script src="main.js"></script>
     <!-- Add EmailJS Script -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script>
-        // Initialize EmailJS with your public key
-        (function() {
-            emailjs.init("FuqhuXq03-1LHzZhM");
-        })();
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+       (function(){
+          emailjs.init("FuqhuXq03-1LHzZhM");
+       })();
     </script>
-    <script>
-        const sections = document.querySelectorAll('section[id]');
-        const navbarTitle = document.getElementById('navbarTitle');
 
-        const updateNavbarTitle = () => {
-            let activeSectionId = 'hero'; // Default to hero if nothing else is active
+    <!-- Central Notification Element -->
+    <div id="centralNotification" class="fixed inset-0 flex items-center justify-center p-4 z-[999] pointer-events-none opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-2xl p-6 text-center max-w-sm w-full transform -translate-y-4 opacity-0 transition-all duration-300 scale-95 border border-gray-200 dark:border-gray-700" role="alert">
+            <p id="notificationMessage" class="text-lg font-semibold text-gray-800 dark:text-white mb-2"></p>
+            <div class="w-16 h-1 mx-auto rounded-full" id="notificationAccent"></div>
+        </div>
+    </div>
 
-            // Iterate through sections from the last one to the first one
-            // This helps prioritize sections higher on the page when multiple are partially visible
-            for (let i = sections.length - 1; i >= 0; i--) {
-                const section = sections[i];
-                const rect = section.getBoundingClientRect();
-
-                // A section is considered 'active' if its top is at or above the viewport's top
-                // (allowing for a small margin like 0 or 1 to ensure the heading is in view)
-                // AND its bottom is still below the viewport's top (meaning some content is visible).
-                if (rect.top <= 1 && rect.bottom > 1) { // 1px buffer for 'at or above the top'
-                    activeSectionId = section.id;
-                    break; // Found the highest section that meets criteria, so stop
-                }
-            }
-
-            // Special case for when at the very top of the page (before any section top hits 1px)
-            if (window.scrollY === 0) {
-                activeSectionId = 'hero';
-            }
-
-            // Update the navbar title based on the active section
-            let titleText = '';
-            switch (activeSectionId) {
-                case 'hero':
-                    titleText = 'Rohan Rai';
-                    break;
-                case 'projects':
-                    titleText = 'Projects';
-                    break;
-                case 'skills':
-                    titleText = 'Skills';
-                    break;
-                case 'contact':
-                    titleText = 'Contact';
-                    break;
-                default:
-                    titleText = 'mySelf'; // Fallback if no specific section is active
-            }
-            navbarTitle.textContent = titleText;
-        };
-
-        // Observe all sections with a simple IntersectionObserver
-        // Its purpose is primarily to trigger updateNavbarTitle efficiently, not to define active section itself.
-        const observerOptions = {
-            root: null, // Use the viewport as the root
-            rootMargin: '0px',
-            threshold: 0 // Fire as soon as any part of the element enters or exits the viewport
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            // The Intersection Observer just triggers the update function
-            updateNavbarTitle();
-        }, observerOptions);
-
-        // Attach observer to all sections
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-
-        // Also, attach the update function to scroll and DOMContentLoaded events
-        // This ensures updates even if IntersectionObserver doesn't fire immediately (e.g., rapid scroll)
-        document.addEventListener('DOMContentLoaded', updateNavbarTitle);
-        window.addEventListener('scroll', updateNavbarTitle);
-        window.addEventListener('load', updateNavbarTitle); // Ensure accurate initial load after all content is loaded
-
-    </script>
 </body>
 </html> 
