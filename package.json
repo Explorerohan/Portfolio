@@ -9,7 +9,11 @@
     "build:css": "tailwindcss -i ./input.css -o ./dist/output.css --minify",
     "build": "npm run build:css"
   },
-  "keywords": ["portfolio", "developer", "web"],
+  "keywords": [
+    "portfolio",
+    "developer",
+    "web"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -18,5 +22,8 @@
     "live-server": "^1.2.2",
     "postcss": "^8.4.24",
     "tailwindcss": "^3.3.2"
+  },
+  "dependencies": {
+    "framer-motion": "^12.18.1"
   }
 }

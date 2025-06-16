@@ -397,54 +397,57 @@ if (heroSection) {
 const certificateModal = document.getElementById('certificateModal');
 const modalImage = document.getElementById('modalImage');
 const closeModalBtn = document.getElementById('closeModal');
-const certificatesGrid = document.getElementById('certificatesGrid');
 
-if (certificatesGrid) {
-    certificatesGrid.addEventListener('click', (e) => {
-        const clickedItem = e.target.closest('.certificate-item img');
-        if (clickedItem) {
-            const fullSrc = clickedItem.getAttribute('data-fullsrc');
-            if (fullSrc) {
-                modalImage.src = fullSrc;
-                
-                // Get the position and size of the clicked thumbnail
-                const rect = clickedItem.getBoundingClientRect();
-
-                // Set initial transform for the modal image to match the thumbnail
-                // We apply it to the modal's inner div, not the modal itself, for better control
-                const modalContent = certificateModal.querySelector('div');
-
-                // Calculate scale and position to match the thumbnail
-                const scaleX = rect.width / modalImage.offsetWidth;
-                const scaleY = rect.height / modalImage.offsetHeight;
-                const translateX = rect.left - modalContent.getBoundingClientRect().left + (rect.width - modalImage.offsetWidth) / 2; // Adjust for centering
-                const translateY = rect.top - modalContent.getBoundingClientRect().top + (rect.height - modalImage.offsetHeight) / 2; // Adjust for centering
-
-                modalContent.style.transition = 'none'; // Disable transition for initial positioning
-                modalContent.style.transform = `translate(${translateX}px, ${translateY}px) scaleX(${scaleX}) scaleY(${scaleY})`;
-                modalContent.style.opacity = '0'; // Start hidden
-                certificateModal.classList.add('show-modal'); // Make modal visible but content still scaled/hidden
-
-                // Force reflow to ensure initial transform is applied
-                void modalContent.offsetWidth;
-
-                // Animate to final state
-                modalContent.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'; // Smooth transition
-                modalContent.style.transform = 'translateY(0) scale(1)';
-                modalContent.style.opacity = '1';
-            }
+// Add event listener to the certificates section
+document.addEventListener('click', (e) => {
+    const viewButton = e.target.closest('.view-certificate-btn');
+    const certificateCard = e.target.closest('.certificate-card img');
+    
+    if (viewButton || certificateCard) {
+        let imageSrc;
+        if (viewButton) {
+            // If the view button was clicked, get the image from the parent card
+            const card = viewButton.closest('.certificate-card');
+            imageSrc = card.querySelector('img').src;
+        } else {
+            // If the image was clicked directly
+            imageSrc = certificateCard.src;
         }
-    });
-}
+        
+        if (imageSrc) {
+            modalImage.src = imageSrc;
+            
+            // Show modal with animation
+            certificateModal.style.opacity = '1';
+            certificateModal.style.pointerEvents = 'auto';
+            
+            // Force reflow
+            void certificateModal.offsetWidth;
+            
+            // Animate modal content
+            const modalContent = certificateModal.querySelector('div');
+            modalContent.style.transform = 'scale(1)';
+            modalContent.style.opacity = '1';
+            
+            // Prevent body scrolling
+            document.body.style.overflow = 'hidden';
+        }
+    }
+});
 
 if (closeModalBtn) {
     closeModalBtn.addEventListener('click', () => {
-        certificateModal.classList.remove('show-modal');
-        // Reset modal content transform after closing for next opening
+        // Animate modal content out
         const modalContent = certificateModal.querySelector('div');
-        modalContent.style.transition = 'none';
-        modalContent.style.transform = 'scale(0.9) translateY(-4px)'; // Default hidden state
+        modalContent.style.transform = 'scale(0.95)';
         modalContent.style.opacity = '0';
+        
+        // Hide modal after animation
+        setTimeout(() => {
+            certificateModal.style.opacity = '0';
+            certificateModal.style.pointerEvents = 'none';
+            document.body.style.overflow = '';
+        }, 300);
     });
 }
 
@@ -452,12 +455,34 @@ if (certificateModal) {
     // Close modal when clicking outside the image
     certificateModal.addEventListener('click', (e) => {
         if (e.target === certificateModal) {
-            certificateModal.classList.remove('show-modal');
-            // Reset modal content transform after closing for next opening
+            // Animate modal content out
             const modalContent = certificateModal.querySelector('div');
-            modalContent.style.transition = 'none';
-            modalContent.style.transform = 'scale(0.9) translateY(-4px)'; // Default hidden state
+            modalContent.style.transform = 'scale(0.95)';
             modalContent.style.opacity = '0';
+            
+            // Hide modal after animation
+            setTimeout(() => {
+                certificateModal.style.opacity = '0';
+                certificateModal.style.pointerEvents = 'none';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && certificateModal.style.opacity === '1') {
+            // Animate modal content out
+            const modalContent = certificateModal.querySelector('div');
+            modalContent.style.transform = 'scale(0.95)';
+            modalContent.style.opacity = '0';
+            
+            // Hide modal after animation
+            setTimeout(() => {
+                certificateModal.style.opacity = '0';
+                certificateModal.style.pointerEvents = 'none';
+                document.body.style.overflow = '';
+            }, 300);
         }
     });
 }

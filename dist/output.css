@@ -889,6 +889,14 @@ h3 {
   top: 100%;
 }
 
+.-top-12 {
+  top: -3rem;
+}
+
+.bottom-4 {
+  bottom: 1rem;
+}
+
 .z-0 {
   z-index: 0;
 }
@@ -1487,6 +1495,10 @@ h3 {
 
 .p-8 {
   padding: 2rem;
+}
+
+.p-3 {
+  padding: 0.75rem;
 }
 
 .px-2 {

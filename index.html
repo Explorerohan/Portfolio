@@ -579,18 +579,16 @@
     </section>
 
     <!-- Enhanced Certificate Modal -->
-    <div id="certificateModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 z-[1000] opacity-0 pointer-events-none transition-all duration-500">
-        <div class="relative bg-white rounded-2xl shadow-2xl p-4 max-w-5xl w-full max-h-[90vh] transform scale-95 opacity-0 transition-all duration-500">
-            <div class="relative">
-                <img id="modalImage" src="" alt="Full Certificate" class="w-full h-full object-contain max-h-[85vh] mx-auto rounded-xl">
-                <div class="absolute top-4 right-4 flex space-x-2">
-                    <button id="downloadCertificate" class="bg-white/10 backdrop-blur-sm text-white rounded-full p-2 hover:bg-white/20 transition-colors duration-200 focus:outline-none">
-                        <i class="fas fa-download"></i>
-                    </button>
-                    <button id="closeModal" class="bg-white/10 backdrop-blur-sm text-white rounded-full p-2 hover:bg-white/20 transition-colors duration-200 focus:outline-none">
-                <i class="fas fa-times"></i>
+    <div id="certificateModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 z-[1000] opacity-0 pointer-events-none transition-all duration-300">
+        <div class="relative max-w-5xl w-full max-h-[90vh] transform scale-95 opacity-0 transition-all duration-300">
+            <button id="closeModal" class="absolute -top-12 right-0 bg-white/10 backdrop-blur-sm text-white rounded-full p-3 hover:bg-white/20 transition-colors duration-200 focus:outline-none z-10">
+                <i class="fas fa-times text-xl"></i>
             </button>
-                </div>
+            <div class="relative bg-white rounded-2xl shadow-2xl p-4">
+                <img id="modalImage" src="" alt="Full Certificate" class="w-full h-full object-contain max-h-[85vh] mx-auto rounded-xl">
+                <button id="downloadCertificate" class="absolute bottom-4 right-4 bg-white/10 backdrop-blur-sm text-white rounded-full p-3 hover:bg-white/20 transition-colors duration-200 focus:outline-none">
+                    <i class="fas fa-download"></i>
+                </button>
             </div>
         </div>
     </div>
