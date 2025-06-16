@@ -526,7 +526,7 @@ updateNavbarTitle = () => {
             titleText = 'Contact';
             break;
         default:
-            titleText = 'mySelf';
+            titleText = 'Quote';
     }
     navbarTitle.textContent = titleText;
 };
