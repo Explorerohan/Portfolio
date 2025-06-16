@@ -286,89 +286,119 @@
             <h2 class="text-3xl md:text-4xl font-bold text-center text-textPrimary mb-16">Featured Projects</h2>
             
             <!-- Projects Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
-                <!-- Left Column: Website Projects -->
-                <div class="space-y-8">
-                    <!-- Project Card 1: College Academic Management System -->
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-                        <div class="relative h-[300px] overflow-hidden">
-                            <img src="assets/Academic management system.png" alt="College Academic Management System" class="w-full h-full object-contain">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
-                    </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-bold text-textPrimary mb-2">College Academic Management System</h3>
-                            <p class="text-textSecondary mb-3 text-sm">A comprehensive Django-based academic management system for colleges. Features include student registration, course management, grade tracking, and attendance monitoring.</p>
-                            <div class="flex flex-wrap gap-2 mb-3">
-                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">Django</span>
-                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">Python</span>
-                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">SQLite</span>
-                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">Bootstrap</span>
-                    </div>
-                            <div class="flex justify-between items-center">
-                                <a href="https://github.com/Explorerohan/College-Academic-Management-System" target="_blank" class="text-secondary hover:text-secondary/80 transition-colors duration-300">
-                                    <i class="fab fa-github text-lg"></i>
-                        </a>
-                                <a href="https://github.com/Explorerohan/College-Academic-Management-System" target="_blank" class="inline-flex items-center px-3 py-1.5 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors duration-300 text-sm">
-                                    View Project
-                                    <i class="fas fa-external-link-alt ml-1.5 text-xs"></i>
-                        </a>
-                    </div>
-                </div>
-                    </div>
-
-                    <!-- Project Card 3: E-commerce Website -->
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-                        <div class="relative h-[300px] overflow-hidden">
-                            <img src="assets/E-commerce.png" alt="E-commerce Website" class="w-full h-full object-contain">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+            <div class="flex flex-col gap-8 max-w-4xl mx-auto">
+                <!-- Project Card 1: College Academic Management System -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl p-4">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="relative md:w-1/2 h-[200px] md:h-auto overflow-hidden bg-gray-100 rounded-lg">
+                            <img src="assets/Academic management system.png" alt="College Academic Management System" class="w-full h-full object-cover">
                         </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-bold text-textPrimary mb-2">E-commerce Website</h3>
-                            <p class="text-textSecondary mb-3 text-sm">A fully responsive e-commerce platform for printers, featuring modern UI/UX design. Includes product listings with detailed specifications, advanced search and filter options.</p>
-                            <div class="flex flex-wrap gap-2 mb-3">
-                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">HTML5</span>
-                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">CSS3</span>
-                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">JavaScript</span>
-                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">Bootstrap</span>
-                    </div>
-                            <div class="flex justify-between items-center">
-                                <a href="https://github.com/Explorerohan/E-commerce-Website" target="_blank" class="text-secondary hover:text-secondary/80 transition-colors duration-300">
-                                    <i class="fab fa-github text-lg"></i>
-                        </a>
-                                <a href="https://github.com/Explorerohan/E-commerce-Website" target="_blank" class="inline-flex items-center px-3 py-1.5 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors duration-300 text-sm">
-                                    View Project
-                                    <i class="fas fa-external-link-alt ml-1.5 text-xs"></i>
-                        </a>
+                        <div class="md:w-1/2 flex flex-col justify-between bg-gray-100 rounded-lg p-4">
+                            <div>
+                                <h3 class="text-2xl font-bold text-textPrimary mb-2">College Academic Management System</h3>
+                                <p class="text-textSecondary mb-4 text-base">A comprehensive web application for managing college academic operations, including student records, course management, and grade tracking.</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-md text-sm">HTML5</span>
+                                    <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-md text-sm">CSS3</span>
+                                    <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-md text-sm">JavaScript</span>
+                                    <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-md text-sm">PHP</span>
+                                    <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-md text-sm">MySQL</span>
+                                </div>
+                            </div>
+                            <div class="mt-auto pt-4 border-t border-gray-200">
+                                <a href="https://github.com/Explorerohan/College-Academic-Management-System" target="_blank" class="block text-gray-700 hover:text-secondary transition-colors duration-300 text-2xl text-center">
+                                    <i class="fas fa-link"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Column: Mobile App Project -->
-                <div class="lg:sticky lg:top-8 lg:self-start">
-                    <!-- Project Card 2: Easy Eats -->
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-                        <div class="relative h-[300px] overflow-hidden">
-                            <img src="assets/Easy-Eats.jpg" alt="Easy Eats" class="w-full h-full object-contain">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+                <!-- Project Card 2: Easy Eats -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl p-4">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="relative md:w-1/2 flex gap-4">
+                            <div class="w-1/2 h-[400px] md:h-auto overflow-hidden bg-gray-100 rounded-lg">
+                                <img src="assets/Easy-Eats.jpg" alt="Easy Eats Mobile App - Main Screen" class="w-full h-full object-cover">
+                            </div>
+                            <div class="w-1/2 h-[400px] md:h-auto overflow-hidden bg-gray-100 rounded-lg">
+                                <img src="assets/Easy-Eats.jpg" alt="Easy Eats Mobile App - Order Screen" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 flex flex-col justify-between bg-gray-100 rounded-lg p-4">
+                            <div>
+                                <h3 class="text-2xl font-bold text-textPrimary mb-2">Easy Eats</h3>
+                                <p class="text-textSecondary mb-4 text-base">A mobile application for food delivery and restaurant management, featuring real-time order tracking and seamless payment integration.</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-md text-sm">Flutter</span>
+                                    <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-md text-sm">Dart</span>
+                                    <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-md text-sm">Firebase</span>
+                                    <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-md text-sm">Google Maps API</span>
+                                </div>
+                            </div>
+                            <div class="mt-auto pt-4 border-t border-gray-200">
+                                <a href="https://github.com/Explorerohan/Easy-Eats" target="_blank" class="block text-gray-700 hover:text-secondary transition-colors duration-300 text-2xl text-center">
+                                    <i class="fas fa-link"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-bold text-textPrimary mb-2">Easy Eats</h3>
-                            <p class="text-textSecondary mb-3 text-sm">A modern food delivery platform built with Django. Features include restaurant listings, menu management, online ordering, and real-time order tracking.</p>
-                            <div class="flex flex-wrap gap-2 mb-3">
-                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">Django</span>
-                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">JavaScript</span>
-                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">PostgreSQL</span>
-                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-xs">Tailwind CSS</span>
+                </div>
+
+                <!-- Project Card 3: E-commerce Website -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl p-4">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="relative md:w-1/2 h-[200px] md:h-auto overflow-hidden bg-gray-100 rounded-lg">
+                            <img src="assets/E-commerce.png" alt="E-commerce Website" class="w-full h-full object-cover">
+                        </div>
+                        <div class="md:w-1/2 flex flex-col justify-between bg-gray-100 rounded-lg p-4">
+                            <div>
+                                <h3 class="text-2xl font-bold text-textPrimary mb-2">E-commerce Website</h3>
+                                <p class="text-textSecondary mb-4 text-base">A fully responsive e-commerce platform for printers, featuring modern UI/UX design. Includes product listings with detailed specifications, advanced search and filter options.</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-md text-sm">HTML5</span>
+                                    <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-md text-sm">CSS3</span>
+                                    <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-md text-sm">JavaScript</span>
+                                    <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-md text-sm">Bootstrap</span>
+                                </div>
+                            </div>
+                            <div class="mt-auto pt-4 border-t border-gray-200">
+                                <a href="https://github.com/Explorerohan/E-commerce-Website" target="_blank" class="block text-gray-700 hover:text-secondary transition-colors duration-300 text-2xl text-center">
+                                    <i class="fas fa-link"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                            <div class="flex justify-between items-center">
-                                <a href="https://github.com/Explorerohan/Easy-Eats" target="_blank" class="text-secondary hover:text-secondary/80 transition-colors duration-300">
-                                    <i class="fab fa-github text-lg"></i>
-                        </a>
-                                <a href="https://github.com/Explorerohan/Easy-Eats" target="_blank" class="inline-flex items-center px-3 py-1.5 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors duration-300 text-sm">
-                                    View Project
-                                    <i class="fas fa-external-link-alt ml-1.5 text-xs"></i>
-                        </a>
+                </div>
+
+                <!-- Coming Soon Project Card -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl p-4">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="relative md:w-1/2 h-[200px] md:h-auto overflow-hidden bg-gray-100 rounded-lg">
+                            <img src="assets/upcoming project.png" alt="Upcoming Project" class="w-full h-full object-cover">
+                        </div>
+                        <div class="md:w-1/2 flex flex-col justify-between bg-gray-100 rounded-lg p-4">
+                            <div>
+                                <h3 class="text-2xl font-bold text-textPrimary mb-2">A Collaborative Creation</h3>
+                                <p class="text-textSecondary mb-4 text-base">Our dedicated team is crafting something extraordinary. Follow our journey as we build the future. We're in the early stages of a truly unique project, combining diverse expertise to solve complex challenges and create impactful solutions.</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-md text-sm">Innovation</span>
+                                    <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-md text-sm">Future-Tech</span>
+                                    <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-md text-sm">Teamwork</span>
+                                </div>
+                            </div>
+                            <div class="mt-auto pt-4 border-t border-gray-200">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
+                                        <span class="text-sm text-textSecondary">Team is Building</span>
+                                    </div>
+                                    <div class="flex space-x-1">
+                                        <div class="w-1.5 h-1.5 bg-secondary/40 rounded-full animate-bounce" style="animation-delay: 0s"></div>
+                                        <div class="w-1.5 h-1.5 bg-secondary/40 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                                        <div class="w-1.5 h-1.5 bg-secondary/40 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -570,9 +600,9 @@
                                         </div>
                                     </div>
                                 </div>
-                </div>
-                </div>
-                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
