@@ -1,23 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-// Mobile menu toggle
-const menuButton = document.querySelector('button.md\\:hidden');
-const navLinks = document.querySelector('.hidden.md\\:flex');
-
-menuButton.addEventListener('click', () => {
-    navLinks.classList.toggle('hidden');
-    navLinks.classList.toggle('flex');
-    navLinks.classList.toggle('flex-col');
-    navLinks.classList.toggle('absolute');
-    navLinks.classList.toggle('top-24');
-    navLinks.classList.toggle('left-0');
-    navLinks.classList.toggle('w-full');
-    navLinks.classList.toggle('bg-primary/95');
-    navLinks.classList.toggle('backdrop-blur-sm');
-    navLinks.classList.toggle('p-6');
-    navLinks.classList.toggle('space-y-6');
-    navLinks.classList.toggle('shadow-lg');
-});
-
 // Intersection Observer for animations
 const observerOptions = {
     threshold: 0.1,
@@ -261,8 +242,6 @@ window.addEventListener('scroll', () => {
 // Navbar glass effect handling
 const navBorder = document.getElementById('navBorder');
 const mainNav = document.getElementById('mainNav'); // Assuming you have a main nav element with this ID
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileMenu = document.getElementById('mobileMenu'); // Assuming you have a mobile menu element with this ID
 let lastScroll = 0;
 
 // Handle navbar scroll behavior with glass effect
@@ -288,27 +267,6 @@ window.addEventListener('scroll', () => {
     }
     
     lastScroll = currentScroll;
-});
-
-// Mobile menu handling with glass effect
-let isMenuOpen = false;
-
-mobileMenuBtn.addEventListener('click', () => {
-    isMenuOpen = !isMenuOpen;
-    if (isMenuOpen) {
-        mobileMenu.classList.remove('hidden');
-        mobileMenu.classList.add('flex', 'flex-col');
-        mainNav.style.background = 'rgba(255, 255, 255, 0.1)'; // Apply glass effect when open
-        mainNav.style.backdropFilter = 'blur(20px)';
-    } else {
-        mobileMenu.classList.remove('flex', 'flex-col');
-        mobileMenu.classList.add('hidden');
-        // Revert to scroll-based glass effect if menu is closed and not scrolled
-        if (window.pageYOffset === 0) {
-            mainNav.style.background = 'transparent';
-            mainNav.style.backdropFilter = 'blur(0px)';
-        }
-    }
 });
 
 // Animated Greeting (from index.html, moved here)
